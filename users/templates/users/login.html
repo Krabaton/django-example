@@ -1,18 +1,23 @@
 {% extends 'blog/base.html' %}
-
+{% load bootstrap4 %}
 {% block content %}
 
     <main>
         <div class="container">
-            {% if form.errors %}
-                <p>Invalid credential. Call to administration</p>
-            {% endif %}
+        <div class="page-header mb-3">
+            <h2>Log in to your account</h2>
+        </div>
+        <div>
             <form method="post" action="{% url 'users:login' %}">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">LogIn</button>
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button name="submit" class="btn btn-primary">Log in</button>
+                {% endbuttons %}
                 <input type="hidden" name="next" value="{% url 'blog:index' %}"/>
             </form>
+        </div>
+
         </div>
     </main>
 

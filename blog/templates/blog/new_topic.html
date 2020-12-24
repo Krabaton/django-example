@@ -1,14 +1,16 @@
 {% extends 'blog/base.html' %}
-
+{% load bootstrap4 %}
 {% block content %}
 
     <main>
         <div class="container">
-            <p>Add new Topic</p>
+            <h3>Add new Topic</h3>
             <form action="{% url 'blog:new_topic' %}" method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-primary">Add topic</button>
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button name="submit" class="btn btn-primary">Add topic</button>
+                {% endbuttons %}
             </form>
         </div>
     </main>

@@ -4,20 +4,24 @@
 
     <main>
         <div class="container">
-            <p>Topics {{ topic }}</p>
+            <h2>Topics: <small>{{ topic }}</small></h2>
             <p>Entries:</p>
-            <p><a href="{% url 'blog:new_entry' topic.id %}">Add new entry</a></p>
-            <ul>
-                {% for entry in entries %}
-                    <li>
-                        <p>{{ entry.date_added|date:'M d, Y H:i' }}</p>
-                        <p>{{ entry.text|linebreaks }}</p>
-                    <p><a href="{% url 'blog:edit_entry' entry.id %}">edit entry</a></p>
-                    </li>
-                    {% empty %}
-                    <li> No data </li>
-                {% endfor %}
-            </ul>
+            <p><a href="{% url 'blog:new_entry' topic.id %}" class="btn btn-light">Add new entry</a></p>
+
+            {% for entry in entries %}
+                <div class="list-group mb-3">
+                    <div class="list-group-item list-group-item-action list-group-item-primary d-flex justify-content-between align-items-center">
+                        <h6>{{ entry.date_added|date:'M d, Y H:i' }}</h6>
+                        <span class="badge">
+                            <a href="{% url 'blog:edit_entry' entry.id %}" class="btn btn-light">edit entry</a>
+                        </span>
+                    </div>
+                    <div class="list-group-item list-group-item-action list-group-item-light">{{ entry.text|linebreaks }}</div>
+                </div>
+                {% empty %}
+                <h5> No data </h5>
+            {% endfor %}
+
         </div>
     </main>
 
