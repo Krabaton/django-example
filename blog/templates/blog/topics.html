@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <main>
+        <div class="container">
+            <p>Topics</p>
+            <p><a href="{% url 'blog:new_topic' %}">Add new topic</a></p>
+            <ul>
+                {% for topic in topics %}
+                    <li>
+                        <a href="{% url 'blog:topic' topic.id %}">{{ topic }}</a>
+                    </li>
+                    {% empty %}
+                    <li> No data </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    <main>
+        <div class="container">
+            {% if form.errors %}
+                <p>Invalid credential. Call to administration</p>
+            {% endif %}
+            <form method="post" action="{% url 'users:login' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">LogIn</button>
+                <input type="hidden" name="next" value="{% url 'blog:index' %}"/>
+            </form>
+        </div>
+    </main>
+
+{% endblock content %}
